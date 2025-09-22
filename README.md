@@ -152,7 +152,7 @@ The application automatically:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://samarth:samarth123@cluster0.4b8hq.mongodb.net/expense_tracker?retryWrites=true&w=majority
+      uri: mongodb+srv://.net/expense_tracker?retryWrites=true&w=majority
       database: expense_tracker
 
 server:
