@@ -1,0 +1,51 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: expense-tracker-backend
+  
+  data:
+    mongodb:
+      uri: mongodb+srv://palsamarth9:samarth@cluster0.odq0ztk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: expense_tracker
+  
+  jackson:
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: NON_NULL
+
+logging:
+  level:
+    com.expensetracker: DEBUG
+    org.springframework.data.mongodb: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# CORS Configuration
+cors:
+  allowed-origins: http://localhost:3000,http://127.0.0.1:3000
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+# Validation settings
+validation:
+  expense:
+    max-amount: 1000000
+    min-amount: 0.01
+  category:
+    max-name-length: 50
+    min-name-length: 2
