@@ -1,30 +1,29 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import AuthWrapper from '@/components/auth/AuthWrapper';
-import Dashboard from '@/components/Dashboard';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authToken, setAuthToken] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    // Check if user is already authenticated
-    const token = localStorage.getItem('authToken');
+    // Check if user is authenticated
+    const token = localStorage.getItem('authToken') || 
+                 document.cookie.split('; ').find(row => row.startsWith('authToken='))?.split('=')[1];
+    
     if (token) {
-      setAuthToken(token);
-      setIsAuthenticated(true);
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
     }
-  }, []);
+  }, [router]);
 
-  const handleAuthenticated = (token: string) => {
-    setAuthToken(token);
-    setIsAuthenticated(true);
-  };
-
-  if (!isAuthenticated) {
-    return <AuthWrapper onAuthenticated={handleAuthenticated} />;
-  }
-
-  return <Dashboard authToken={authToken} />;
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <p className="text-gray-600">Redirecting...</p>
+      </div>
+    </div>
+  );
 }
