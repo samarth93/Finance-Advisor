@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   const isPublicRoute = publicRoutes.includes(pathname);
 
   // Protected routes that require authentication
-  const protectedRoutes = ['/dashboard', '/expenses', '/categories', '/analytics'];
+  const protectedRoutes = ['/dashboard', '/expenses', '/categories', '/analytics', '/reports', '/settings'];
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
 
   // If accessing protected route without token, redirect to login

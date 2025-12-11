@@ -146,7 +146,7 @@ export default function Dashboard({ authToken }: DashboardProps) {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading your expense tracker...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading your expense tracker...</p>
         </div>
       </div>
     );
@@ -176,11 +176,11 @@ export default function Dashboard({ authToken }: DashboardProps) {
         animate="animate"
       >
         {/* Welcome Section */}
-        <motion.div variants={fadeIn} className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        <motion.div variants={fadeIn} className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             Welcome back, {user?.name || 'User'}! 👋
           </h2>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Here's your expense overview for this month
           </p>
         </motion.div>
@@ -188,17 +188,17 @@ export default function Dashboard({ authToken }: DashboardProps) {
         {/* Stats Cards */}
         <motion.div 
           variants={stagger}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8"
         >
           {/* Total Expenses */}
-          <motion.div variants={fadeIn} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors duration-300">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <ChartBarIcon className="h-8 w-8 text-blue-600" />
+                <ChartBarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 dark:text-blue-400" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Spent</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                <p className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400">Total Spent</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
                   {apiUtils.formatCurrency(stats.totalAmount)}
                 </p>
               </div>
@@ -206,27 +206,27 @@ export default function Dashboard({ authToken }: DashboardProps) {
           </motion.div>
 
           {/* Total Count */}
-          <motion.div variants={fadeIn} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors duration-300">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <CalendarIcon className="h-8 w-8 text-green-600" />
+                <CalendarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 dark:text-green-400" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Expenses</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.totalExpenses}</p>
+              <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                <p className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400">Total Expenses</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalExpenses}</p>
               </div>
             </div>
           </motion.div>
 
           {/* Average Expense */}
-          <motion.div variants={fadeIn} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 sm:col-span-2 lg:col-span-1 transition-colors duration-300">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <ArrowTrendingUpIcon className="h-8 w-8 text-yellow-600" />
+                <ArrowTrendingUpIcon className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-600 dark:text-yellow-400" />
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Average Expense</p>
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                <p className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400">Average Expense</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100 truncate">
                   {apiUtils.formatCurrency(stats.averageExpense)}
                 </p>
               </div>
@@ -235,66 +235,66 @@ export default function Dashboard({ authToken }: DashboardProps) {
         </motion.div>
 
         {/* Quick Actions */}
-        <motion.div variants={fadeIn} className="mb-8">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div variants={fadeIn} className="mb-6 sm:mb-8">
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">Quick Actions</h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <button 
               onClick={() => setShowAddExpense(true)}
-              className="p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-md transition-all duration-200 text-left group min-h-[100px] sm:min-h-[120px]"
             >
-              <PlusIcon className="h-8 w-8 text-blue-600 mb-2 group-hover:scale-110 transition-transform" />
-              <h4 className="font-medium text-gray-900">Add Expense</h4>
-              <p className="text-sm text-gray-500">Record a new expense</p>
+              <PlusIcon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 dark:text-blue-400 mb-2 group-hover:scale-110 transition-transform" />
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base">Add Expense</h4>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">Record a new expense</p>
             </button>
 
             <button 
               onClick={() => setCurrentView('expenses')}
-              className="p-4 bg-white rounded-lg border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-500 hover:shadow-md transition-all duration-200 text-left group min-h-[100px] sm:min-h-[120px]"
             >
-              <ChartBarIcon className="h-8 w-8 text-green-600 mb-2 group-hover:scale-110 transition-transform" />
-              <h4 className="font-medium text-gray-900">View Expenses</h4>
-              <p className="text-sm text-gray-500">Browse all expenses</p>
+              <ChartBarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 dark:text-green-400 mb-2 group-hover:scale-110 transition-transform" />
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base">View Expenses</h4>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">Browse all expenses</p>
             </button>
 
             <button 
               onClick={() => setCurrentView('categories')}
-              className="p-4 bg-white rounded-lg border border-gray-200 hover:border-yellow-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-yellow-300 dark:hover:border-yellow-500 hover:shadow-md transition-all duration-200 text-left group min-h-[100px] sm:min-h-[120px]"
             >
-              <TagIcon className="h-8 w-8 text-yellow-600 mb-2 group-hover:scale-110 transition-transform" />
-              <h4 className="font-medium text-gray-900">Categories</h4>
-              <p className="text-sm text-gray-500">Manage categories</p>
+              <TagIcon className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-600 dark:text-yellow-400 mb-2 group-hover:scale-110 transition-transform" />
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base">Categories</h4>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">Manage categories</p>
             </button>
 
             <button 
               onClick={() => setCurrentView('analytics')}
-              className="p-4 bg-white rounded-lg border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-500 hover:shadow-md transition-all duration-200 text-left group min-h-[100px] sm:min-h-[120px]"
             >
-              <ArrowTrendingUpIcon className="h-8 w-8 text-purple-600 mb-2 group-hover:scale-110 transition-transform" />
-              <h4 className="font-medium text-gray-900">Analytics</h4>
-              <p className="text-sm text-gray-500">View insights</p>
+              <ArrowTrendingUpIcon className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600 dark:text-purple-400 mb-2 group-hover:scale-110 transition-transform" />
+              <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base">Analytics</h4>
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">View insights</p>
             </button>
           </div>
         </motion.div>
 
         {/* Recent Activity */}
         {summary && summary.totalExpenses > 0 && (
-          <motion.div variants={fadeIn} className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-medium text-gray-900">Category Breakdown</h3>
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-gray-100">Category Breakdown</h3>
             </div>
-            <div className="p-6">
-              <div className="space-y-3">
+            <div className="p-4 sm:p-6">
+              <div className="space-y-3 sm:space-y-4">
                 {summary.categoryBreakdown?.slice(0, 5).map((category) => (
                   <div key={category.categoryId} className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <span className="text-lg mr-2">{category.icon}</span>
-                      <span className="font-medium text-gray-900">{category.categoryName}</span>
+                    <div className="flex items-center min-w-0 flex-1">
+                      <span className="text-base sm:text-lg mr-2 flex-shrink-0">{category.icon}</span>
+                      <span className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base truncate">{category.categoryName}</span>
                     </div>
-                    <div className="text-right">
-                      <div className="font-medium text-gray-900">
+                    <div className="text-right ml-4 flex-shrink-0">
+                      <div className="font-medium text-gray-900 dark:text-gray-100 text-sm sm:text-base">
                         {apiUtils.formatCurrency(category.amount)}
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
                         {category.count} expenses • {category.percentage?.toFixed(1)}%
                       </div>
                     </div>
@@ -309,34 +309,34 @@ export default function Dashboard({ authToken }: DashboardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
-              <CurrencyDollarIcon className="h-8 w-8 text-blue-600" />
-              <h1 className="ml-2 text-2xl font-bold text-gray-900">Expense Tracker</h1>
+              <CurrencyDollarIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+              <h1 className="ml-2 text-2xl font-bold text-gray-900 dark:text-gray-100">Expense Tracker</h1>
             </div>
             
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setShowAddExpense(true)}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+                className="bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors flex items-center space-x-2"
               >
                 <PlusIcon className="h-5 w-5" />
                 <span>Add Expense</span>
               </button>
               
               <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center">
+                <div className="h-8 w-8 bg-blue-600 dark:bg-blue-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">
                     {user?.name?.charAt(0) || 'U'}
                   </span>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="text-gray-500 hover:text-gray-700 p-2"
+                  className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 p-2 transition-colors"
                   title="Logout"
                 >
                   <PowerIcon className="h-5 w-5" />
@@ -348,7 +348,7 @@ export default function Dashboard({ authToken }: DashboardProps) {
       </header>
 
       {/* Navigation Tabs */}
-      <nav className="bg-white border-b border-gray-200">
+      <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8">
             {[
@@ -362,8 +362,8 @@ export default function Dashboard({ authToken }: DashboardProps) {
                 onClick={() => setCurrentView(key as any)}
                 className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   currentView === key
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <Icon className="h-5 w-5" />
@@ -387,14 +387,14 @@ export default function Dashboard({ authToken }: DashboardProps) {
       />
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-12">
+      <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
-              <CurrencyDollarIcon className="h-6 w-6 text-blue-600" />
-              <span className="ml-2 text-sm text-gray-600">Expense Tracker v1.0.0</span>
+              <CurrencyDollarIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">Expense Tracker v1.0.0</span>
             </div>
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
               Built with ❤️ using Spring Boot & Next.js
             </div>
           </div>

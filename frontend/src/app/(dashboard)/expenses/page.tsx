@@ -33,12 +33,12 @@ export default function ExpensesPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Expenses</h1>
-            <p className="text-gray-600">Manage and track your expenses</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Expenses</h1>
+            <p className="text-gray-600 dark:text-gray-400">Manage and track your expenses</p>
           </div>
           <button 
             onClick={() => setShowAddExpense(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+            className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2"
           >
             <PlusIcon className="h-4 w-4" />
             <span>Add Expense</span>
@@ -46,7 +46,7 @@ export default function ExpensesPage() {
         </div>
 
         {/* Expense List */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
           <ExpenseList refreshTrigger={refreshTrigger} />
         </div>
       </motion.div>

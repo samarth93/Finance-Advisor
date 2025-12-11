@@ -9,7 +9,7 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-300">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div 
@@ -22,7 +22,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             repeat: Infinity, 
             ease: "easeInOut" 
           }}
-          className="absolute top-10 left-10 w-20 h-20 bg-blue-200/30 rounded-full blur-xl"
+          className="absolute top-10 left-10 w-20 h-20 bg-blue-200/30 dark:bg-blue-600/20 rounded-full blur-xl"
         />
         <motion.div 
           animate={{ 
@@ -35,7 +35,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             ease: "easeInOut",
             delay: 1 
           }}
-          className="absolute top-1/3 right-20 w-32 h-32 bg-purple-200/25 rounded-full blur-2xl"
+          className="absolute top-1/3 right-20 w-32 h-32 bg-purple-200/25 dark:bg-purple-600/15 rounded-full blur-2xl"
         />
         <motion.div 
           animate={{ 

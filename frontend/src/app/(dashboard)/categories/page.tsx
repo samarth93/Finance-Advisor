@@ -27,12 +27,12 @@ export default function CategoriesPage() {
     >
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Categories</h1>
-        <p className="text-gray-600">Organize your expenses with custom categories</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Categories</h1>
+        <p className="text-gray-600 dark:text-gray-400">Organize your expenses with custom categories</p>
       </div>
 
       {/* Category Manager */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
         <CategoryManager onCategoryChange={handleCategoryChange} />
       </div>
     </motion.div>

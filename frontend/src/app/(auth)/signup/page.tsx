@@ -21,7 +21,9 @@ export default function SignupPage() {
   const handleAuthSuccess = (token: string) => {
     // Set cookie for middleware
     document.cookie = `authToken=${token}; path=/; max-age=${7 * 24 * 60 * 60}`; // 7 days
-    router.push('/dashboard');
+    
+    // Use router.push with replace to ensure proper navigation
+    router.replace('/dashboard');
   };
 
   const handleSwitchToLogin = () => {

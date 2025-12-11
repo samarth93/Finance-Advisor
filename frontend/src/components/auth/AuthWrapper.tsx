@@ -66,7 +66,7 @@ export default function AuthWrapper({ onAuthenticated }: AuthWrapperProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-gray-600 font-medium text-lg"
+            className="text-gray-600 dark:text-gray-400 font-medium text-lg"
           >
             Checking authentication...
           </motion.p>

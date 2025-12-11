@@ -132,10 +132,10 @@ export default function DashboardPage() {
       >
         {/* Welcome Section */}
         <motion.div variants={fadeIn}>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             Welcome back, {user.name || 'User'}! 👋
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             Here's your expense overview for this month
           </p>
         </motion.div>
@@ -146,16 +146,16 @@ export default function DashboardPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {/* Total Expenses */}
-          <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <ChartBarIcon className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center transition-colors duration-300">
+                  <ChartBarIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Spent</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Spent</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {apiUtils.formatCurrency(stats.totalAmount)}
                 </p>
               </div>
@@ -163,31 +163,31 @@ export default function DashboardPage() {
           </motion.div>
 
           {/* Total Count */}
-          <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <CalendarIcon className="h-6 w-6 text-green-600" />
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center transition-colors duration-300">
+                  <CalendarIcon className="h-6 w-6 text-green-600 dark:text-green-400" />
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Expenses</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.totalExpenses}</p>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Expenses</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalExpenses}</p>
               </div>
             </div>
           </motion.div>
 
           {/* Average Expense */}
-          <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors duration-300">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                  <ArrowTrendingUpIcon className="h-6 w-6 text-yellow-600" />
+                <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center transition-colors duration-300">
+                  <ArrowTrendingUpIcon className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Average Expense</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Average Expense</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {apiUtils.formatCurrency(stats.averageExpense)}
                 </p>
               </div>
@@ -198,10 +198,10 @@ export default function DashboardPage() {
         {/* Quick Actions */}
         <motion.div variants={fadeIn}>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Quick Actions</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Quick Actions</h2>
             <button 
               onClick={() => setShowAddExpense(true)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+              className="bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors flex items-center space-x-2"
             >
               <PlusIcon className="h-4 w-4" />
               <span>Add Expense</span>
@@ -212,81 +212,81 @@ export default function DashboardPage() {
               onClick={() => setShowAddExpense(true)}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="p-6 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-md transition-all duration-200 text-left group"
             >
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <PlusIcon className="h-6 w-6 text-blue-600" />
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <PlusIcon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">Add Expense</h3>
-              <p className="text-sm text-gray-500">Record a new expense</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">Add Expense</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Record a new expense</p>
             </motion.button>
 
             <motion.button 
               onClick={() => router.push('/expenses')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="p-6 bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-500 hover:shadow-md transition-all duration-200 text-left group"
             >
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <CurrencyDollarIcon className="h-6 w-6 text-green-600" />
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <CurrencyDollarIcon className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">View Expenses</h3>
-              <p className="text-sm text-gray-500">Browse all expenses</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">View Expenses</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Browse all expenses</p>
             </motion.button>
 
             <motion.button 
               onClick={() => router.push('/categories')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="p-6 bg-white rounded-xl border border-gray-200 hover:border-yellow-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-yellow-300 dark:hover:border-yellow-500 hover:shadow-md transition-all duration-200 text-left group"
             >
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <TagIcon className="h-6 w-6 text-yellow-600" />
+              <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <TagIcon className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">Categories</h3>
-              <p className="text-sm text-gray-500">Manage categories</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">Categories</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Manage categories</p>
             </motion.button>
 
             <motion.button 
               onClick={() => router.push('/analytics')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="p-6 bg-white rounded-xl border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-200 text-left group"
+              className="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-500 hover:shadow-md transition-all duration-200 text-left group"
             >
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <ArrowTrendingUpIcon className="h-6 w-6 text-purple-600" />
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <ArrowTrendingUpIcon className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-1">Analytics</h3>
-              <p className="text-sm text-gray-500">View insights</p>
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-1">Analytics</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">View insights</p>
             </motion.button>
           </div>
         </motion.div>
 
         {/* Recent Activity */}
         {summary && summary.totalExpenses > 0 && (
-          <motion.div variants={fadeIn} className="bg-white rounded-xl shadow-sm border border-gray-200">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Category Breakdown</h3>
-              <p className="text-sm text-gray-500">Your top spending categories this month</p>
+          <motion.div variants={fadeIn} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Category Breakdown</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Your top spending categories this month</p>
             </div>
             <div className="p-6">
               <div className="space-y-4">
                 {summary.categoryBreakdown?.slice(0, 5).map((category) => (
                   <div key={category.categoryId} className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                      <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mr-3 transition-colors duration-300">
                         <span className="text-lg">{category.icon}</span>
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{category.categoryName}</p>
-                        <p className="text-sm text-gray-500">{category.count} expenses</p>
+                        <p className="font-medium text-gray-900 dark:text-gray-100">{category.categoryName}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{category.count} expenses</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-gray-900">
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">
                         {apiUtils.formatCurrency(category.amount)}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         {category.percentage?.toFixed(1)}%
                       </p>
                     </div>

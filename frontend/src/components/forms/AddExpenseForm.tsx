@@ -106,23 +106,23 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md sm:max-w-lg max-h-[95vh] sm:max-h-[90vh] overflow-y-auto transition-colors duration-300">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">Add New Expense</h2>
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">Add New Expense</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
           >
-            <XMarkIcon className="h-6 w-6" />
+            <XMarkIcon className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-4 sm:p-6 space-y-4 sm:space-y-5">
           {/* Amount */}
           <div>
-            <label className="label">Amount *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Amount *</label>
             <input
               type="number"
               step="0.01"
@@ -132,8 +132,9 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
                 min: { value: 0.01, message: 'Amount must be greater than 0' },
                 max: { value: 1000000, message: 'Amount cannot exceed 1,000,000' },
               })}
-              className={`input ${errors.amount ? 'input-error' : ''}`}
+              className={`w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${errors.amount ? 'border-red-500' : ''}`}
               placeholder="Enter amount"
+              autoFocus
             />
             {errors.amount && (
               <p className="text-red-500 text-sm mt-1">{errors.amount.message}</p>
@@ -142,10 +143,10 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
 
           {/* Category */}
           <div>
-            <label className="label">Category *</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category *</label>
             <select
               {...register('categoryId', { required: 'Category is required' })}
-              className={`input ${errors.categoryId ? 'input-error' : ''}`}
+              className={`w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${errors.categoryId ? 'border-red-500' : ''}`}
             >
               <option value="">Select category</option>
               {categories.map((category) => (
@@ -160,24 +161,24 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
           </div>
 
           {/* Date and Time */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="label">Date *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Date *</label>
               <input
                 type="date"
                 {...register('date', { required: 'Date is required' })}
-                className={`input ${errors.date ? 'input-error' : ''}`}
+                className={`w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${errors.date ? 'border-red-500' : ''}`}
               />
               {errors.date && (
                 <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
               )}
             </div>
             <div>
-              <label className="label">Time *</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Time *</label>
               <input
                 type="time"
                 {...register('time', { required: 'Time is required' })}
-                className={`input ${errors.time ? 'input-error' : ''}`}
+                className={`w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${errors.time ? 'border-red-500' : ''}`}
               />
               {errors.time && (
                 <p className="text-red-500 text-sm mt-1">{errors.time.message}</p>
@@ -187,13 +188,13 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
 
           {/* Payee */}
           <div>
-            <label className="label">Payee</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Payee</label>
             <input
               type="text"
               {...register('payee', {
                 maxLength: { value: 100, message: 'Payee name cannot exceed 100 characters' },
               })}
-              className="input"
+              className="w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               placeholder="Enter payee name"
             />
             {errors.payee && (
@@ -203,13 +204,13 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
 
           {/* Description */}
           <div>
-            <label className="label">Description</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</label>
             <textarea
               {...register('description', {
                 maxLength: { value: 500, message: 'Description cannot exceed 500 characters' },
               })}
-              className="input"
-              rows={2}
+              className="w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+              rows={3}
               placeholder="Enter description"
             />
             {errors.description && (
@@ -219,8 +220,11 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
 
           {/* Payment Method */}
           <div>
-            <label className="label">Payment Method</label>
-            <select {...register('paymentMethod')} className="input">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Payment Method</label>
+            <select 
+              {...register('paymentMethod')} 
+              className="w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            >
               {PAYMENT_METHODS.map((method) => (
                 <option key={method.value} value={method.value}>
                   {method.label}
@@ -231,13 +235,13 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
 
           {/* Notes */}
           <div>
-            <label className="label">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Notes</label>
             <textarea
               {...register('notes', {
                 maxLength: { value: 1000, message: 'Notes cannot exceed 1000 characters' },
               })}
-              className="input"
-              rows={2}
+              className="w-full px-3 py-3 sm:py-2 text-base sm:text-sm border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+              rows={3}
               placeholder="Additional notes"
             />
             {errors.notes && (
@@ -246,18 +250,18 @@ export default function AddExpenseForm({ isOpen, onClose, onSuccess }: AddExpens
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end space-x-3 pt-4">
+          <div className="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-3 pt-4 sm:pt-6">
             <button
               type="button"
               onClick={onClose}
-              className="btn btn-outline"
+              className="w-full sm:w-auto px-4 py-3 sm:py-2 text-base sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors"
               disabled={isSubmitting}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="btn btn-primary"
+              className="w-full sm:w-auto px-4 py-3 sm:py-2 text-base sm:text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Adding...' : 'Add Expense'}

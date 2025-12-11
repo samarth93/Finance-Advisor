@@ -19,12 +19,12 @@ export default function AnalyticsPage() {
     >
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
-        <p className="text-gray-600">Insights and trends for your spending habits</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
+        <p className="text-gray-600 dark:text-gray-400">Insights and trends for your spending habits</p>
       </div>
 
       {/* Analytics Component */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
         <Analytics />
       </div>
     </motion.div>

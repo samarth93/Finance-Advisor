@@ -52,55 +52,49 @@ export default function ExpenseList({ onEditExpense, refreshTrigger }: ExpenseLi
       const categoriesData = await api.categories.getAll();
       setCategories(categoriesData);
     } catch (error) {
-      toast.error('Failed to load categories');
+      console.error('Failed to load categories:', error);
     }
   };
 
   const filterAndSortExpenses = () => {
-    let filtered = expenses.filter(expense => {
-      const matchesSearch = !searchTerm || 
+    let filtered = [...expenses];
+
+    if (searchTerm) {
+      filtered = filtered.filter(expense => 
         expense.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         expense.payee?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        expense.category?.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesCategory = !selectedCategory || expense.categoryId === selectedCategory;
-      
-      return matchesSearch && matchesCategory;
-    });
+        expense.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
 
-    // Sort expenses
+    if (selectedCategory) {
+      filtered = filtered.filter(expense => expense.categoryId === selectedCategory);
+    }
+
     filtered.sort((a, b) => {
-      let aValue: any, bValue: any;
+      let comparison = 0;
       
       switch (sortBy) {
         case 'date':
-          aValue = new Date(a.date + ' ' + a.time);
-          bValue = new Date(b.date + ' ' + b.time);
+          comparison = new Date(a.date).getTime() - new Date(b.date).getTime();
           break;
         case 'amount':
-          aValue = a.amount;
-          bValue = b.amount;
+          comparison = a.amount - b.amount;
           break;
         case 'category':
-          aValue = a.category || '';
-          bValue = b.category || '';
+          comparison = a.category.localeCompare(b.category);
           break;
-        default:
-          aValue = a.date;
-          bValue = b.date;
       }
-
-      if (sortOrder === 'asc') {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
+      
+      return sortOrder === 'desc' ? -comparison : comparison;
     });
 
     setFilteredExpenses(filtered);
   };
 
   const handleDeleteExpense = async (expenseId: string) => {
+    if (!confirm('Are you sure you want to delete this expense?')) return;
+
     try {
       await api.expenses.delete(expenseId);
       toast.success('Expense deleted successfully');
@@ -125,7 +119,6 @@ export default function ExpenseList({ onEditExpense, refreshTrigger }: ExpenseLi
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      {/* Filters */}
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
         <div className="flex flex-col gap-3 sm:gap-4">
           <div className="relative">
@@ -184,6 +177,7 @@ export default function ExpenseList({ onEditExpense, refreshTrigger }: ExpenseLi
         </div>
       ) : (
         <>
+          {/* Desktop Table View */}
           {/* Desktop Table View */}
           <div className="hidden sm:block bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden transition-colors duration-300">
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -255,6 +249,52 @@ export default function ExpenseList({ onEditExpense, refreshTrigger }: ExpenseLi
           </div>
 
           {/* Mobile Card View */}
+                          <div>
+                            <div className="font-medium">{apiUtils.formatDate(expense.date)}</div>
+                            <div className="text-xs text-gray-500">{apiUtils.formatTime(expense.time)}</div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span 
+                            className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            style={{ 
+                              backgroundColor: categoryInfo.color + '20', 
+                              color: categoryInfo.color 
+                            }}
+                          >
+                            <span className="mr-1">{categoryInfo.icon}</span>
+                            {expense.category}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-900 max-w-xs truncate">{expense.description || '-'}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{expense.payee || '-'}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">{apiUtils.formatCurrency(expense.amount)}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                          <div className="flex justify-center space-x-2">
+                            {onEditExpense && (
+                              <button
+                                onClick={() => onEditExpense(expense)}
+                                className="text-primary-600 hover:text-primary-900 transition-colors p-1"
+                              >
+                                <PencilIcon className="h-4 w-4" />
+                              </button>
+                            )}
+                            <button
+                              onClick={() => handleDeleteExpense(expense.expenseId)}
+                              className="text-red-600 hover:text-red-900 transition-colors p-1"
+                            >
+                              <TrashIcon className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           <div className="sm:hidden space-y-3">
             {filteredExpenses.map((expense) => {
               const categoryInfo = getCategoryInfo(expense.categoryId);
@@ -315,7 +355,6 @@ export default function ExpenseList({ onEditExpense, refreshTrigger }: ExpenseLi
         </>
       )}
 
-      {/* Summary */}
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
           <div className="text-sm text-gray-600 dark:text-gray-400">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -25,29 +26,30 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body className={`${inter.className} h-full bg-gray-50 antialiased`}>
-        <div id="root" className="h-full">
-          {children}
-        </div>
-        
-        {/* Toast notifications */}
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-          gutter={8}
-          containerClassName=""
-          containerStyle={{}}
-          toastOptions={{
-            // Define default options
-            className: '',
-            duration: 4000,
-            style: {
-              background: '#fff',
-              color: '#363636',
-              border: '1px solid #e5e7eb',
-              borderRadius: '0.5rem',
-              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-              fontSize: '14px',
+      <body className={`${inter.className} h-full bg-gray-50 dark:bg-gray-900 antialiased transition-colors duration-300`}>
+        <ThemeProvider>
+          <div id="root" className="h-full">
+            {children}
+          </div>
+          
+          {/* Toast notifications */}
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+              // Define default options
+              className: '',
+              duration: 4000,
+              style: {
+                background: 'var(--toast-bg)',
+                color: 'var(--toast-color)',
+                border: '1px solid var(--toast-border)',
+                borderRadius: '0.5rem',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                fontSize: '14px',
               maxWidth: '500px',
             },
             // Default options for specific types
@@ -80,6 +82,7 @@ export default function RootLayout({
         
         {/* Portal for modals and overlays */}
         <div id="portal" />
+        </ThemeProvider>
       </body>
     </html>
   );
